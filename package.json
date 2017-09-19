@@ -1,0 +1,110 @@
+{
+  "name": "chatbet-messenger",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thierryskoda/chatbet-messenger.git"
+  },
+  "keywords": [
+    "node",
+    "boilerplate",
+    "koa",
+    "mongoose"
+  ],
+  "engines": {
+    "node": "8.1.4"
+  },
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon src --exec babel-node --presets es2015,stage-2",
+    "start": "./node_modules/.bin/babel-node src",
+    "deploy": "npm run prettier && git add . && git commit -m",
+    "push-prod": "heroku pipelines:promote -a staging-chatbet-messenger",
+    "deploy-prod": "git add . && git commit -m \"Simple push\" && git push heroku master && heroku pipelines:promote -a staging-chatbet-messenger",
+    "lint": "eslint src/**/*.js && eslint src/**/**/*.js && eslint src/**/**/**/*.js",
+    "lint:fix": "npm run lint -- --fix",
+    "precommit": "lint-staged && opt --in pre-commit",
+    "test": "ava",
+    "linttest": "kcd-scripts lint",
+    "format": "kcd-scripts format"
+  },
+  "dependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.22.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "compression": "^1.7.0",
+    "consolidate": "^0.14.5",
+    "cors": "^2.8.1",
+    "crypto": "^0.0.3",
+    "dotenv": "^2.0.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.4",
+    "express-jwt": "^5.3.0",
+    "express-session": "^1.15.5",
+    "fb": "^1.1.1",
+    "helmet": "^3.8.1",
+    "jsonwebtoken": "^8.0.1",
+    "kcors": "^2.2.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-helmet": "^3.2.0",
+    "koa-json-logger": "^1.0.2",
+    "koa-logger": "^3.0.1",
+    "koa-passport": "^4.0.0",
+    "koa-router": "^7.2.1",
+    "koa-session": "^5.5.0",
+    "kue": "^0.11.6",
+    "mixpanel": "^0.7.0",
+    "moment": "^2.16.0",
+    "mongoose": "^4.11.12",
+    "passport": "^0.4.0",
+    "redis": "^2.6.5",
+    "shortid": "^2.2.6"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-register": "^6.26.0",
+    "kcd-scripts": "^0.16.0",
+    "lint-staged": "^3.4.0",
+    "mongomem": "^0.1.9",
+    "nodemon": "^1.7.3",
+    "pre-commit": "^1.2.2"
+  },
+  "config": {
+    "extends": "./node_modules/kcd-scripts/eslint.js"
+  },
+  "lint-staged": {
+    "*.+(js|json)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js",
+    "rules": {
+      "max-lines": "off",
+      "no-eq-null": "off",
+      "eqeqeq": "off"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "bracketSpacing": true
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
+  "ava": {
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
+  }
+}
