@@ -1,10 +1,10 @@
 {
-  "name": "chatbet-messenger",
+  "name": "MYAPP",
   "version": "1.0.0",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thierryskoda/chatbet-messenger.git"
+    "url": "git+https://github.com/thierryskoda/MYAPP.git"
   },
   "keywords": [
     "node",
@@ -19,8 +19,8 @@
     "dev": "NODE_ENV=development nodemon src --exec babel-node --presets es2015,stage-2",
     "start": "./node_modules/.bin/babel-node src",
     "deploy": "npm run prettier && git add . && git commit -m",
-    "push-prod": "heroku pipelines:promote -a staging-chatbet-messenger",
-    "deploy-prod": "git add . && git commit -m \"Simple push\" && git push heroku master && heroku pipelines:promote -a staging-chatbet-messenger",
+    "push-prod": "heroku pipelines:promote -a staging-MYAPP",
+    "deploy-prod": "git add . && git commit -m \"Simple push\" && git push heroku master && heroku pipelines:promote -a staging-MYAPP",
     "lint": "eslint src/**/*.js && eslint src/**/**/*.js && eslint src/**/**/**/*.js",
     "lint:fix": "npm run lint -- --fix",
     "precommit": "lint-staged && opt --in pre-commit",
@@ -81,6 +81,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "babel": {
+    "presets": ["es2015", "stage-0"]
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
