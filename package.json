@@ -10,26 +10,25 @@
     "node",
     "boilerplate",
     "koa",
-    "mongoose"
+    "mongoose",
+    "express"
   ],
   "engines": {
     "node": "8.1.4"
   },
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src --exec babel-node",
+    "dev": "NODE_ENV=development ./node_modules/.bin/nodemon src --exec ./node_modules/.bin/babel-node",
     "start": "./node_modules/.bin/babel-node src",
     "deploy": "npm run prettier && git add . && git commit -m",
     "push-prod": "heroku pipelines:promote -a staging-MYAPP",
-    "deploy-prod": "git add . && git commit -m \"Simple push\" && git push heroku master && heroku pipelines:promote -a staging-MYAPP",
-    "lint": "eslint src/**/*.js && eslint src/**/**/*.js && eslint src/**/**/**/*.js",
-    "lint:fix": "npm run lint -- --fix",
-    "precommit": "lint-staged && opt --in pre-commit",
+    "deploy-prod": "git push heroku master && heroku pipelines:promote -a staging-MYAPP",
+    "precommit": "skod-scripts precommit",
     "test": "ava",
-    "linttest": "kcd-scripts lint",
-    "format": "kcd-scripts format"
+    "lint": "skod-scripts lint",
+    "format": "skod-scripts format",
+    "validate": "skod-scripts validate"
   },
   "dependencies": {
-    "babel-cli": "^6.16.0",
     "babel-core": "^6.22.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.22.0",
@@ -66,44 +65,12 @@
   },
   "devDependencies": {
     "ava": "^0.22.0",
+    "babel-cli": "^6.26.0",
     "babel-register": "^6.26.0",
-    "kcd-scripts": "^0.16.0",
-    "lint-staged": "^3.4.0",
     "mongomem": "^0.1.9",
-    "nodemon": "^1.7.3",
-    "pre-commit": "^1.2.2"
+    "nodemon": "^1.12.1",
+    "skod-scripts": "^0.3.0"
   },
-  "config": {
-    "extends": "./node_modules/kcd-scripts/eslint.js"
-  },
-  "lint-staged": {
-    "*.+(js|json)": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "babel": {
-    "presets": ["es2015", "stage-0"]
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/kcd-scripts/eslint.js",
-    "rules": {
-      "max-lines": "off",
-      "no-eq-null": "off",
-      "eqeqeq": "off"
-    }
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": true
-  },
-  "eslintIgnore": [
-    "node_modules",
-    "coverage",
-    "dist"
-  ],
   "ava": {
     "require": [
       "babel-register",

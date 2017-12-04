@@ -1,7 +1,10 @@
-export default app => {
-  app.use('/api/user', require('../api/user'))
+import userRoutes from '../api/user'
+import itemRoutes from '../api/item'
 
-  // All other routes should redirect to the index.html
+export default app => {
+  app.use('/api/v1/users', userRoutes)
+  app.use('/api/v1/items', itemRoutes)
+
   app.route('/*').get((req, res) => {
     res.status(404)
     res.render('error')

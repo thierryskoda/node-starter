@@ -1,6 +1,7 @@
 import url from 'url'
 import kue from 'kue'
 
+import startQueueProcessing from './process'
 import {captureError} from '../utility/logHelper'
 
 let redisConfig
@@ -26,6 +27,6 @@ queue.on('error', err => {
 
 queue.setMaxListeners(1000)
 
-export default queue
+startQueueProcessing(queue)
 
-require('./process')
+export default queue

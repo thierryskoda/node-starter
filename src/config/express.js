@@ -68,6 +68,13 @@ export default function(config) {
 
   if (env === 'development' || env === 'test') {
     app.use(errorHandler()) // Error handler - has to be last
+    app.use((req, res, next) => {
+      console.log(
+        `Incomming request url: '${req.url}' with authorization: ${req.headers
+          .authorization} and body: ${req.body}`,
+      )
+      next()
+    })
   }
 
   return Promise.resolve(app)

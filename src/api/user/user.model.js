@@ -11,9 +11,8 @@ const UserSchema = new Schema(
   },
 )
 
-/**
- * Methods
- */
 UserSchema.methods = {}
+
+UserSchema.statics = {
 
 export default mongoose.model('User', UserSchema)

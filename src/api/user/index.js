@@ -7,4 +7,4 @@ const router = new Router()
 
 router.get('/', user.index)
 
-module.exports = router
+export default router
